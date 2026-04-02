@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Edo Apartment — Welcome Guide</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F7F3EE;
+    --warm-white: #FDFAF6;
+    --sand: #E8DDD0;
+    --terracotta: #C4724A;
+    --gold: #D4A95A;
+    --dark: #1C1814;
+    --muted: #7A6E65;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+  }
+
+  header {
+    padding: 1.25rem 2rem;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--sand);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+
+  .header-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    color: var(--dark);
+  }
+
+  .header-sub {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .quick-topics {
+    padding: 1rem 2rem;
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--sand);
+    flex-shrink: 0;
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+  }
+  .quick-topics::-webkit-scrollbar { display: none; }
+
+  .topic-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-right: 0.75rem;
+    vertical-align: middle;
+  }
+
+  .topic-btn {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    border: 1px solid var(--sand);
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 300;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+  .topic-btn:hover {
+    background: var(--terracotta);
+    border-color: var(--terracotta);
+    color: white;
+  }
+
+  .chat-area {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .msg {
+    max-width: 680px;
+    animation: fadeUp 0.3s ease;
+  }
+
+  .msg.assistant { align-self: flex-start; }
+  .msg.user { align-self: flex-end; }
+
+  .msg-bubble {
+    padding: 1rem 1.25rem;
+    line-height: 1.75;
+    font-size: 0.9rem;
+  }
+
+  .msg.assistant .msg-bubble {
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-left: 3px solid var(--terracotta);
+    color: var(--dark);
+  }
+
+  .msg.user .msg-bubble {
+    background: var(--terracotta);
+    color: white;
+  }
+
+  .msg-sender {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+    padding-left: 0.25rem;
+  }
+
+  .msg.user .msg-sender {
+    text-align: right;
+    padding-right: 0.25rem;
+  }
+
+  .typing {
+    display: flex;
+    gap: 4px;
+    padding: 1rem 1.25rem;
+    background: var(--warm-white);
+    border: 1px solid var(--sand);
+    border-left: 3px solid var(--terracotta);
+    width: fit-content;
+  }
+
+  .typing span {
+    width: 6px;
+    height: 6px;
+    background: var(--terracotta);
+    border-radius: 50%;
+    animation: bounce 1.2s infinite;
+  }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+
+  @keyframes bounce {
+    0%, 60%, 100% { transform: translateY(0); }
+    30% { transform: translateY(-6px); }
+  }
+
+  .input-area {
+    padding: 1.25rem 2rem;
+    background: var(--warm-white);
+    border-top: 1px solid var(--sand);
+    display: flex;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .chat-input {
+    flex: 1;
+    padding: 0.875rem 1.25rem;
+    background: var(--cream);
+    border: 1px solid var(--sand);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--dark);
+    outline: none;
+    transition: border-color 0.2s;
+    border-radius: 0;
+  }
+  .chat-input:focus { border-color: var(--terracotta); }
+  .chat-input::placeholder { color: var(--muted); }
+
+  .send-btn {
+    padding: 0.875rem 1.5rem;
+    background: var(--terracotta);
+    color: white;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    flex-shrink: 0;
+  }
+  .send-btn:hover { background: #B3613B; }
+  .send-btn:disabled { background: var(--muted); cursor: not-allowed; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 600px) {
+    .chat-area { padding: 1rem; }
+    .input-area { padding: 1rem; }
+    header { padding: 1rem; }
+    .quick-topics { padding: 0.75rem 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div>
+    <div class="header-logo">The Edo Apartment</div>
+  </div>
+  <div class="header-sub">Welcome Guide</div>
+</header>
+
+<div class="quick-topics">
+  <span class="topic-label">Rýchle témy:</span>
+  <button class="topic-btn" onclick="quickAsk('Ako sa dostanem do bytu? Príchod, kódy, kľúče.')">🔑 Príchod & zámok</button>
+  <button class="topic-btn" onclick="quickAsk('Ako funguje parkovanie a garáž?')">🚗 Parkovanie</button>
+  <button class="topic-btn" onclick="quickAsk('Aké je wifi heslo?')">📶 Wifi</button>
+  <button class="topic-btn" onclick="quickAsk('Ako funguje klimatizácia?')">❄️ Klimatizácia</button>
+  <button class="topic-btn" onclick="quickAsk('Ako funguje markíza na terase?')">☂️ Markíza</button>
+  <button class="topic-btn" onclick="quickAsk('Kde sú uteráky a posteľné prádlo?')">🛏 Posteľné prádlo</button>
+  <button class="topic-btn" onclick="quickAsk('Kde sa vyhadzuje odpad a ako separovať?')">♻️ Odpad</button>
+  <button class="topic-btn" onclick="quickAsk('Ako funguje bazén? Kedy môžem ísť?')">🏊 Bazén</button>
+  <button class="topic-btn" onclick="quickAsk('Čo treba urobiť pri odchode z bytu?')">🚪 Odchod</button>
+  <button class="topic-btn" onclick="quickAsk('Ako kontaktujem majiteľov v núdzovej situácii?')">📞 Kontakt</button>
+  <button class="topic-btn" onclick="quickAsk('Čo odporúčaš v okolí? Reštaurácie, zmrzlina, hrádza.')">🍽 Tipy v okolí</button>
+  <button class="topic-btn" onclick="quickAsk('Čo sa nachádza v kuchyni? Spotrebiče a vybavenie.')">🍳 Kuchyňa</button>
+</div>
+
+<div class="chat-area" id="chatArea">
+  <div class="msg assistant">
+    <div class="msg-sender">Edo</div>
+    <div class="msg-bubble">
+      Vitajte v The Edo Apartment! 🐾<br><br>
+      Som tu, aby som ti pomohol zorientovať sa v byte. Opýtaj sa ma na čokoľvek — parkovanie, wifi, spotrebiče, bazén, odchod... Odpovedám v jazyku, v ktorom píšeš.
+    </div>
+  </div>
+</div>
+
+<div class="input-area">
+  <input
+    type="text"
+    class="chat-input"
+    id="chatInput"
+    placeholder="Napíšte otázku... (napr. 'kde je wifi heslo')"
+    onkeydown="if(event.key==='Enter') sendMessage()"
+  >
+  <button class="send-btn" id="sendBtn" onclick="sendMessage()">Odoslať</button>
+</div>
+
+<script>
+// API key is set via URL parameter: ?key=YOUR_KEY
+const urlParams = new URLSearchParams(window.location.search);
+window.EDO_API_KEY = urlParams.get('key') || '';
+
+const APARTMENT_KNOWLEDGE = `
+Si Welcome sprievodca pre hostí apartmánu The Edo Apartment v Banke pri Piešťanoch. Odpovedaj vždy v jazyku, v ktorom ti hosť píše. Markíza = awning (EN), Sonnensegel/Markise (DE). Pípač = key fob (EN). Stúpačka = water main valve (EN). Buď priateľský, konkrétny a stručný. Volaj sa Edo. Hosťom VŽDY tykaj — používaj tykanie (ty, tvoj, si...).
+
+=== PARKOVANIE A GARÁŽ ===
+Parkovacie boxy sú číslo 37 a 38 v prvej garáži.
+Pípač má štyri tlačidlá:
+- Tlačidlo 1: otvára vstupnú bránu
+- Tlačidlo 2: otvára bránu garáže
+Obe brány sa zatvárajú automaticky.
+Na zväzku kľúčov je čip na otváranie vstupnej brány, vchodových dverí z garáže do foyer, aj bráničky pre peších z hlavnej cesty.
+
+=== PRÍCHOD A ZÁMOK ===
+Vchodová brána sa dá otvoriť kódom 67 na vchodovej bráne - vyvolá to telefonát na intercom aj majiteľovi.
+Nuki zámok: hosť dostane dočasný kód. Ak nebol doručený, vyžiadaj si ho.
+Na zväzku je aj klasický kľúč od bytu.
+Apple Home: kompatibilné, ale treba získať prístup od majiteľa.
+
+POZOR - Antipanic systém dverí:
+- Zdvihnutie kľučky = zamknutie bytu
+- Stlačenie kľučky = odomknutie, aj keď je byt zamknutý
+- AK je zámok zamknutý a stlačíš kľučku, Nuki sa zasekne (myslí si že je zamknuté, ale je odomknuté)
+- RIEŠENIE: Nepoužívaj kľučku na vnútornej strane! Na otváranie/zamykanie používaj výlučne Nuki (tlačidlo alebo otáčanie manuálne).
+
+=== VODA A KÚRENIE ===
+Hlavný uzáver vody je v kúpeľni pri vstupe, ľavá strana - stúpačka.
+Pri prvom príchode: otvor teplú aj studenú vodu na stúpačke.
+Pri odchode (check-out): stúpačky zamkni.
+Termostat podlahového kúrenia: pravá stena smerom do chodby. Dá sa ovládať aj cez Apple Home. Odporúčame s ním nehýbať.
+
+=== KLIMATIZÁCIA ===
+Klimatizácia je vo všetkých troch miestnostiach.
+Ovládače:
+- Detská izba: na poličke
+- Spálňa: v zásuvke stolíka (nie na stolíku)
+- Obývačka: v príborníku, dvierka najbližšie k oknu
+DÔLEŽITÉ: Všetky tri klimatizácie zdieľajú jednu vonkajšiu jednotku. Možno nastaviť buď chladenie ALEBO kúrenie - nikdy nie kombináciu.
+
+=== MARKÍZA A TERASA ===
+Ovládač markízy (awning) je na stene v obývačke.
+POZOR: Na terase je pomerne veterno. Markíza (awning/sunshade) má čidlo vetra - pri silnom vetre sa automaticky zasunie a na ovládači bliká/svieti červené svetlo. Vtedy sa nedá vysunúť.
+Je tam aj ovládač na čidlo slnka (automatické vysunutie) - NEZAPÍNAŤ.
+LED pásy markízy (awning): diaľkový ovládač je v príborníku (funguje len keď je markíza otvorená).
+Plašiče komárov: v príborníku, zastrč do zásuvky, pri odchode z terasy zamknúť.
+Reťazové osvetlenie na terase: vypínaj na noc.
+Záhradný nábytok: pri odchode alebo daždi umiestni do prekrytej časti terasy.
+Hadica na terase: dá sa napojiť na spršku (hnedý kruh na zemi). Pre teplejšiu vodu rozvinúť a nechať na slnku.
+Kvety a bylinky: prosíme, polievaj ich.
+Servírovacie stolíky: môžu byť na terase alebo v byte (v zime).
+
+=== WIFI ===
+Názov siete: TeamEdo
+Heslo: WelcomeHome67
+Pokrytie po celom byte.
+
+=== TELEVÍZIA A ZÁBAVA ===
+Smart TV má aplikáciu Orange TV (bez kódu).
+Streamovacie služby sú prihlásené na profily majiteľov - môžeš sa odhlásiť a prihlásiť vlastnými údajmi.
+JBL reproduktor: zvyčajne na príborníku, nabíjačka USB-C je v skrini v pracovnom kúte.
+Šach na stole: hodnotný, prosíme o opatrné zaobchádzanie.
+Lietadlo na poličke: nie je hračka, veľmi drahá maketa - nedávaj deťom do rúk.
+Spoločenské hry: vo vnútri konferenčného stolíka, spolu s vreckovkami.
+
+=== OSVETLENIE ===
+Osvetlenie vedľa televízora: cez Smart zásuvky (Apple Home) alebo priamo zapojiť do zásuvky.
+Žalúzie: ovládanie na stene, aj smart cez appku Tuya - odporúčame nepoužívať Tuyu, je komplikovanejšia.
+Šatník v spálni: stlačiť biely vypínač smerom dolu. LED pás šatníka: ovládač nalepený na bielom vypínači.
+Pracovný kút - LED pás: najskôr zapnúť vypínač na stene pod obrazom, potom nenápadné tlačidlo na kraji skrinky (zapnutie/vypnutie/intenzita).
+
+=== PRÍBORNÍK V OBÝVAČKE ===
+Obsahuje:
+- Diaľkový ovládač klimatizácie obývačky
+- Diaľkový ovládač LED pásov markízy
+- Plašiče komárov na terasu
+- Jedálenské prestieranie, servítky, podpivníky, podložky pod horúce hrnce
+- Poháre na gin-tonic (na stopke), štamprlíky, whiskey poháre, krígle na pivo
+
+=== PRACOVNÝ KÚT ===
+Zabudovaná rozkladacia posteľ - periny a vankúše v skrini v chodbe.
+Docking station (na Smart zásuvku - Apple Home).
+AirPod Mini, obrazovka, Apple klávesnica.
+LED pás nad stolíkom: vypínač na stene pod obrazom + tlačidlo na kraji skrinky.
+V skrinke vedľa: laserová tlačiareň s Wifi, A4 papiere, lepiace pásky, ceruzky.
+
+=== ROBOTICKÝ VYSÁVAČ ===
+Xiaomi Roborock sa nachádza v obývačke medzi príborníkom a oknom (základňa).
+Ovláda sa cez aplikáciu - hostia k nej nemajú prístup. V prípade potreby kontaktuj majiteľov.
+
+=== TECHNICKÁ MIESTNOSŤ ===
+Zavesené bicykle - môžeš používať. Zámky sú na poličke za dverami alebo na kľúčoch. Pred jazdou skontroluj tlak, v Piešťanoch uzamykaj ich.
+4 ks lehátok - na terasu alebo pri bazéne.
+Vysavač, ručný vysavač, saponáty, náradie, sáčky do smetných košov - väčšina v krabici na poličke za dverami.
+Nordic Walking palice (1 pár), Paddleboard.
+
+=== KUCHYŇA ===
+Kávovar na linke. Nad kávovarom je mikrovlnka a nad mikrovlnkou je skrinka, kde sa nachádza káva, nádoba na speňovanie mlieka a hriankovač.
+Ak bliká odvápňovanie - nerieši sa, vyriešia majitelia.
+Použitá káva: do bio odpadu.
+Rýchlovarná konvica: vyťahuj zo zásuvky hneď po použití.
+
+Skrinka pod kávovarom obsahuje:
+- 4 ks tácky, AirFryer, Gril, Cyklofľaše, Fľaše na Soda Stream, Soda Stream bombička
+
+Umývačka: vedľa drezu.
+POZOR: Pod drezom sa NEVYHADZUJÚ odpadky. Odpadky patria do komory (separovaný zber).
+Taniere, poháre, misky: horné poličky nad drezom.
+Soľ do umývačky, leštidlo, kapsule: polička pod drezom.
+Vpravo dolu pod drezom: ručný mixér, digitálna váha, dosky na krájanie, alobal, papier na pečenie, plastové nádoby.
+Skrinka ostrovčeka vľavo vedľa rúry: čaje, koreniny, oleje, ocot, kakao, bujón.
+Ľavá zásuvka kuchynského ostrovčeka: príbor, varechy, strúhadlá, otvárák na víno.
+Skrinka ostrovčeka vpravo vedľa rúry: hrnce, panvice a zapekacie misky.
+Na ostrovčeku je sklokeramická indukčná doska, nad ostrovčekom je digestor.
+Jedálenský stôl je rozkladací - stredová časť môže trochu vŕzgať, pomôž jej, je z masívneho dreva.
+
+=== ŠPAJZA ===
+Potraviny v špajze: smelo používajte. Prosíme, doplň použité potraviny pre ďalších hostí.
+
+=== ODPAD ===
+Odpad je dôležitá téma - vývoz 1x mesačne, prosíme, dôsledne separuj:
+- Komunál
+- Bio (vrátane použitej kávy)
+- Papier
+- Plast (aj hliník/aluminium)
+- Sklo
+Väčšina nádob je označená. Pravidelne vynášaj hlavne bio a komunál.
+Keď sa naplnia nádoby v komore, vynes ich do prístrešku pri vchodovej bráne.
+Odpadky patria do komory, NIE pod drez.
+
+=== KÚPEĽŇA ===
+Po sprchovaní: utrieť sklo stierkou (nachádza sa v sprchovom kúte na zemi).
+Ak ťažšie odteká voda: použiť "zvon" - v ľavom spodnom šuflíku pod umývadlom. Používaj pri pustenej vode, nie na sucho.
+Kapsule do práčky: v rovnakom ľavom spodnom šuflíku.
+Práčka a sušička: v kúpeľni.
+Uteráky na vešiakoch: ak tam sú, patria majiteľom - dať do koša na prádlo. Čisté uteráky sú v skrini v chodbe.
+Dodatočný vešiak na 4 uteráky: ľavý spodný šuflík.
+WC papier: pravý spodný šuflík.
+Sušič vlasov: pravý horný šuflík.
+Ventilátor: vypínač označený na stene. Používaj pri WC a sprche (kúpeľňa bez okien).
+
+WC sprška - POZOR:
+1. Najskôr pustiť vodu batériou v stene
+2. Potom uvoľniť tlačidlom priamo na hadici
+3. Po použití: vypnúť zatlačením batérie na stene
+
+=== SPÁLŇA ===
+Šatník: žehliaca doska, sušiak na prádlo (aj na osušky/plavky na terasu), štipce, žehlička.
+Epedy na vonkajšie sedenie: v šatníku.
+
+=== DETSKÁ IZBA ===
+Horné osvetlenie ovládané centrálne.
+LED pásy nad každou posteľou.
+Postele sú vysúvacie - matrace vysúvacích častí sú priamo v posteli.
+Posteľné prádlo, vankúše, paplony: v skrini v chodbe.
+Pracovný stôl v detskej izbe.
+
+=== SKRIŇA V CHODBE ===
+Uteráky, osušky, posteľné prádlo, osušky na terasu a k bazénu.
+Deky.
+Lopta, rakety, ruksak.
+Periny a vankúše pre rozkladaciu posteľ v pracovnom kúte.
+
+=== BAZÉN ===
+Nachádza sa na 1. poschodí.
+Vstup: jednou stranou kľučka, druhou stranou čip (rovnaký ako od vstupnej brány).
+Pred vstupom do bazéna sa sprchovať.
+Umelý trávnik: zákaz nosiť zvieratá a akékoľvek sklo.
+Toaleta a umývadlo: v prístavbe (dentálna klinika) vľavo - šedé dvere.
+Čas bazéna: 09:00 - 19:00 (zvuky sa intenzívne šíria okolím).
+
+=== ODPORÚČANIA V OKOLÍ ===
+
+--- REŠTAURÁCIE A JEDLO ---
+Na panvici (susedia): výčap Pilsner Urquell a skvelé jedlo. https://napanvici.sk/
+Ikigai: skvelá reštaurácia. https://ikigaisushi.sk/?lang=en
+Chutovka: super pizza. https://chutovka.sk/
+Astoria: pri sklennom moste v centre. https://www.astoria.beer/
+D'Art: skvelá reštaurácia. https://www.pizzadart.sk/
+Monalisa: najlepšia zmrzlina v centre. https://www.monalisa-zmrzlina.com/
+Glácio (cukráreň): https://www.glacio.sk/
+
+--- PEKÁRNE ---
+Poem (kvásková): hneď pri Auparku. https://poem.sk/
+Violetta (balkánska pekáreň): hneď pri Auparku. https://www.facebook.com/pages/Pekare%C5%88-Violeta/271312323579567
+
+--- OBCHODY ---
+Coop: najbližšie malé potraviny priamo na Banke.
+Billa: najbližšia v Auparku Piešťany.
+Kaufland: super blízko, sídlisko Adama Trajana.
+Miestny trh: na nábreží na druhej strane rieky — odporúčame.
+
+--- PRÍRODA A AKTIVITY ---
+Hrádza (Sĺňava): skvelé miesto na prechádzku alebo bicyklovanie. Pozor — ak odbočíš smerom od Piešťan (smer Hlohovec), hrádza je cez pracovný týždeň otvorená až po pracovnej dobe. Na hrádzi je viacero bufetov. https://visitpiestany.sk/kolokruh-slnava-otvaracie-hodiny-priehrady/
+Ekopark Piešťany: https://ekoparkpiestany.sk/
+Loď po Váhu (Adam Trajan): treba booknúť lístky dopredu. https://www.lodpiestany.sk/
+Kúpalisko Eva: https://blog.relaxos.sk/kupalisko-eva-piestany/
+Kúpele Piešťany (najväčšia atrakcia): https://www.kupelepiestany.eu/
+Kúpeľné oblátky na Kúpeľnom ostrove: https://www.facebook.com/kupelneoblatky.souvenirshop.piestany/
+
+--- VZDIALENOSTI ---
+Centrum Piešťan: cca 20-25 min. pešo, popri hrádzi cez Krajinský most.
+Kúpeľný ostrov: cca 15-20 min. pešo.
+
+--- DOPRAVA ---
+Taxi: Bold taxi alebo A-taxi (Piešťanské taxi) — majú vlastnú aplikáciu.
+MHD: Na Banke nie je MHD, ale prímestská doprava z Hlohovca ide až na stanicu Piešťany (autobusová a vlaková v jednom). Zastávka priamo na hlavnej ceste: Banka-Sĺňava.
+
+=== KONTAKT NA MAJITEĽOV ===
+V prípade núdze alebo akýchkoľvek otázok kontaktuj majiteľov:
+
+Ronald Lupták
+Tel: +421 905 213 858
+Email: ronald.luptak@linea5.sk
+
+Lucia Luptáková
+Tel: +421 903 500 480
+Email: lucia.babarik@gmail.com
+
+=== ODCHOD - CHECKOUT ===
+1. Vypnúť hlavný uzáver teplej aj studenej vody (stúpačka v kúpeľni).
+2. Najskôr si vyparkuj auto pred dom.
+3. Kľúče nechaj v byte.
+4. Byt zamkni cez Nuki (over, že sa dvere naozaj zamkli).
+5. Na odchod cez hlavný vchod nepotrebuješ pípač.
+`;
+
+const conversation = [];
+
+async function sendMessage(userText) {
+  const input = document.getElementById('chatInput');
+  const text = userText || input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  addMessage('user', text);
+  conversation.push({ role: 'user', content: text });
+
+  const btn = document.getElementById('sendBtn');
+  btn.disabled = true;
+
+  const typingEl = addTyping();
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': window.EDO_API_KEY || '',
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: APARTMENT_KNOWLEDGE,
+        messages: conversation
+      })
+    });
+
+    const data = await response.json();
+    const reply = data.content?.[0]?.text || 'Prepáčte, nastala chyba. Skús znova.';
+
+    typingEl.remove();
+    addMessage('assistant', reply);
+    conversation.push({ role: 'assistant', content: reply });
+  } catch(e) {
+    typingEl.remove();
+    addMessage('assistant', 'Nastala technická chyba. Skúste znova alebo kontaktujte majiteľa.');
+  }
+
+  btn.disabled = false;
+  input.focus();
+}
+
+function quickAsk(text) {
+  sendMessage(text);
+}
+
+function addMessage(role, text) {
+  const chatArea = document.getElementById('chatArea');
+  const msg = document.createElement('div');
+  msg.className = `msg ${role}`;
+
+  const sender = document.createElement('div');
+  sender.className = 'msg-sender';
+  sender.textContent = role === 'assistant' ? 'Edo' : 'Vy';
+
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+  // Basic markdown: **bold**, newlines
+    let formatted = text
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\n/g, '<br>');
+    bubble.innerHTML = formatted;
+
+  msg.appendChild(sender);
+  msg.appendChild(bubble);
+  chatArea.appendChild(msg);
+  chatArea.scrollTop = chatArea.scrollHeight;
+  return msg;
+}
+
+function addTyping() {
+  const chatArea = document.getElementById('chatArea');
+  const msg = document.createElement('div');
+  msg.className = 'msg assistant';
+
+  const sender = document.createElement('div');
+  sender.className = 'msg-sender';
+  sender.textContent = 'Edo';
+
+  const typing = document.createElement('div');
+  typing.className = 'typing';
+  typing.innerHTML = '<span></span><span></span><span></span>';
+
+  msg.appendChild(sender);
+  msg.appendChild(typing);
+  chatArea.appendChild(msg);
+  chatArea.scrollTop = chatArea.scrollHeight;
+  return msg;
+}
+
+document.getElementById('chatInput').focus();
+</script>
+</body>
+</html>
