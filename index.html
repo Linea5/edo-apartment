@@ -266,6 +266,69 @@
   .about-badge .big { font-size: 2.5rem; font-weight: 300; line-height: 1; }
   .about-badge .small { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.25rem; }
 
+  /* EQUIPMENT */
+  .equipment {
+    background: var(--warm-white);
+  }
+  .equipment-header {
+    margin-bottom: 3rem;
+  }
+  .equipment-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .equipment-header h2 em {
+    font-style: italic;
+    color: var(--terracotta);
+  }
+  .equipment-header p {
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.8;
+    max-width: 600px;
+  }
+  .equipment-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .equipment-category {
+    padding: 2rem;
+    background: var(--cream);
+    border-top: 2px solid var(--sand);
+    transition: border-color 0.3s;
+  }
+  .equipment-category:hover {
+    border-color: var(--terracotta);
+  }
+  .equipment-category-title {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--terracotta);
+    margin-bottom: 1rem;
+  }
+  .equipment-list {
+    list-style: none;
+  }
+  .equipment-list li {
+    font-size: 0.85rem;
+    color: var(--muted);
+    padding: 0.3rem 0;
+    border-bottom: 1px solid var(--sand);
+    line-height: 1.5;
+  }
+  .equipment-list li:last-child {
+    border-bottom: none;
+  }
+  .equipment-list li strong {
+    color: var(--dark);
+    font-weight: 500;
+  }
+
   /* CALENDAR */
   .calendar-section {
     background: var(--warm-white);
@@ -720,6 +783,7 @@
     .about-grid, .booking-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .about-badge { display: none; }
     .pricing-grid { grid-template-columns: 1fr 1fr; }
+    .equipment-grid { grid-template-columns: 1fr; }
     .form-row { grid-template-columns: 1fr; }
     .hero-content { padding: 3rem 1.5rem; }
   }
@@ -731,6 +795,7 @@
   <div class="nav-logo">The Edo Apartment</div>
   <ul class="nav-links">
     <li><a href="#o-byte">O byte</a></li>
+    <li><a href="#vybavenie">Vybavenie</a></li>
     <li><a href="#dostupnost">Dostupnosť</a></li>
     <li><a href="#ceny">Ceny</a></li>
     <li><a href="#rezervacia">Rezervácia</a></li>
@@ -759,29 +824,39 @@
       <div class="about-text reveal">
         <p class="section-label">O byte</p>
         <h2>Náš byt.<br>Občas ho pustíme<br><em>správnym ľuďom.</em></h2>
-        <p>Toto nie je hotel ani anonymný apartmán. Je to miesto, kde trávime čas my — a kde si na chvíľu môžete prísť aj vy.</p>
-        <p>Juhozápadná orientácia znamená zlaté svetlo celý deň a nezabudnuteľné západy slnka priamo z terasy. Riekou Váh sa môžete nechať uniesť pohľadom, bicyklom po hrádzi alebo ráno kávou vonku.</p>
-        <p>Piešťany sú 10 minút pešo. Kúpele tiež.</p>
+        <p>Toto nie je hotel ani anonymný apartmán. Je to miesto, kde trávime čas my — a kde si na chvíľu môžeš prísť aj ty.</p>
+        <p>Juhozápadná orientácia znamená zlaté svetlo celý deň a nezabudnuteľné západy slnka priamo z terasy. Riekou Váh sa môžeš nechať uniesť pohľadom, bicyklom po hrádzi alebo ráno kávou vonku.</p>
+        <p>Centrum Piešťan je 20–25 minút pešo pozdĺž hrádze. Kúpeľný ostrov 15–20 minút.</p>
         <div class="about-features">
           <div class="feature">
-            <div class="feature-icon">🛖</div>
-            <div class="feature-title">115 m² + terasa 55 m²</div>
-            <div class="feature-desc">Priestor, ktorý si nevšimnete, že je veľký — lebo sa v ňom dobre cítite</div>
+            <div class="feature-icon">🛏</div>
+            <div class="feature-title">3 izby · 6–8 osôb</div>
+            <div class="feature-desc">Spálňa pre 2, detská pre 4, výklopná posteľ v obývačke pre 2</div>
           </div>
           <div class="feature">
             <div class="feature-icon">🌊</div>
             <div class="feature-title">Bazén v komplexe</div>
-            <div class="feature-desc">Pre rezidentov, len pre vás</div>
+            <div class="feature-desc">Len pre rezidentov, otvorený 9:00–19:00</div>
           </div>
           <div class="feature">
-            <div class="feature-icon">🚗</div>
-            <div class="feature-title">2 garážové miesta</div>
-            <div class="feature-desc">Žiadne hľadanie parkovania</div>
+            <div class="feature-icon">💻</div>
+            <div class="feature-title">Pracovný kút</div>
+            <div class="feature-desc">Docking station, monitor, Apple klávesnica, laserová tlačiareň, rýchla WiFi</div>
           </div>
           <div class="feature">
             <div class="feature-icon">🚲</div>
-            <div class="feature-title">Bicykle, gril, klíma</div>
-            <div class="feature-desc">Všetko čo potrebujete je tam</div>
+            <div class="feature-title">Bicykle & Paddleboard</div>
+            <div class="feature-desc">Bicykle, paddleboard, lehátka, gril na terase</div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">☕</div>
+            <div class="feature-title">Plne vybavená kuchyňa</div>
+            <div class="feature-desc">Kávovar, AirFryer, Soda Stream, indukcia, umývačka</div>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🔑</div>
+            <div class="feature-title">Bezkontaktný príchod</div>
+            <div class="feature-desc">Nuki zámok, Apple Home, garážové miesta č. 37 a 38</div>
           </div>
         </div>
       </div>
@@ -793,6 +868,90 @@
           <span class="big">Edo</span>
           <span class="small">Chief Inspector</span>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EQUIPMENT -->
+<section class="equipment" id="vybavenie">
+  <div class="container">
+    <div class="equipment-header reveal">
+      <p class="section-label">Vybavenie</p>
+      <h2>Postavený pre nás.<br><em>Vybavený pre teba.</em></h2>
+      <p>Byt sme zariaďovali pre seba — nie pre prenájom. Preto tam nájdeš veci, ktoré v prenájmoch zvyčajne chýbajú.</p>
+    </div>
+    <div class="equipment-grid">
+      <div class="equipment-category reveal">
+        <p class="equipment-category-title">Spanie & izby</p>
+        <ul class="equipment-list">
+          <li><strong>Spálňa</strong> — manželská posteľ, šatník, klimatizácia</li>
+          <li><strong>Detská izba</strong> — 2 vysúvacie postele (celkom 4 miesta)</li>
+          <li><strong>Obývačka</strong> — výklopná posteľ pre 2</li>
+          <li>Posteľné prádlo, vankúše, paplóny</li>
+          <li>Uteráky, osušky, osušky k bazénu</li>
+          <li>Žehlička, žehliaca doska, sušiak</li>
+        </ul>
+      </div>
+      <div class="equipment-category reveal">
+        <p class="equipment-category-title">Kúpeľňa & starostlivosť</p>
+        <ul class="equipment-list">
+          <li>Práčka + sušička</li>
+          <li>Sušič vlasov</li>
+          <li>Sprcha s termostatom</li>
+          <li>WC so sprškou</li>
+          <li>Ventilátor</li>
+          <li>Robotický vysávač Roborock</li>
+        </ul>
+      </div>
+      <div class="equipment-category reveal">
+        <p class="equipment-category-title">Kuchyňa</p>
+        <ul class="equipment-list">
+          <li>Kávovar + nádoba na speňovanie mlieka</li>
+          <li>Indukčná sklokeramická doska</li>
+          <li>Rúra na pečenie, mikrovlnka</li>
+          <li>Umývačka riadu</li>
+          <li>AirFryer, gril, Soda Stream</li>
+          <li>Rýchlovarná konvica, hriankovač</li>
+          <li>Plne vybavená — hrnce, panvice, príbor</li>
+        </ul>
+      </div>
+      <div class="equipment-category reveal">
+        <p class="equipment-category-title">Pracovný kút</p>
+        <ul class="equipment-list">
+          <li>Docking station + monitor</li>
+          <li>Apple klávesnica</li>
+          <li>Laserová tlačiareň (WiFi)</li>
+          <li>Výklopná posteľ (keď nepracuješ)</li>
+          <li>WiFi TeamEdo — rýchla, celý byt</li>
+          <li>AirPod Mini</li>
+        </ul>
+      </div>
+      <div class="equipment-category reveal">
+        <p class="equipment-category-title">Terasa & vonku</p>
+        <ul class="equipment-list">
+          <li>55 m² terasa, juhozápad, západ slnka</li>
+          <li>Tíkový stôl + stoličky</li>
+          <li>Markíza s čidlom vetra</li>
+          <li>Gril, servírovacie stolíky</li>
+          <li>Reťazové osvetlenie</li>
+          <li>Plašiče komárov</li>
+          <li>Hadica + terasa sprcha</li>
+          <li>Kvety a bylinky</li>
+        </ul>
+      </div>
+      <div class="equipment-category reveal">
+        <p class="equipment-category-title">Zábava & šport</p>
+        <ul class="equipment-list">
+          <li>2 bicykle + zámky</li>
+          <li>Paddleboard</li>
+          <li>4 lehátka (terasa / bazén)</li>
+          <li>Nordic Walking palice</li>
+          <li>JBL reproduktor</li>
+          <li>Smart TV + Orange TV</li>
+          <li>Šach, spoločenské hry</li>
+          <li>Lopta, rakety, ruksak</li>
+        </ul>
       </div>
     </div>
   </div>
