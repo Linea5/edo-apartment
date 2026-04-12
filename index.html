@@ -901,6 +901,12 @@
 
   /* RESPONSIVE */
   @media (max-width: 768px) {
+    div[style*="background-attachment: fixed"],
+    div[style*="fixed no-repeat"] {
+      background-attachment: scroll !important;
+      background-position: center center !important;
+      height: 220px !important;
+    }
     nav { padding: 1.25rem 1.5rem; }
     .nav-links { display: none; }
     section { padding: 4rem 1.5rem; }
@@ -1001,7 +1007,7 @@
 </section>
 
 <!-- PARALLAX 1 -->
-<div style="height:350px;background:url('https://i.imgur.com/dYR1QiL.jpg') center/cover no-repeat;"></div>
+<div style="height:350px;background:url('https://i.imgur.com/dYR1QiL.jpg') center/cover fixed no-repeat;"></div>
 
 <!-- EQUIPMENT -->
 <section class="equipment" id="vybavenie">
@@ -1131,7 +1137,7 @@
 </section>
 
 <!-- PARALLAX -->
-<div style="height:400px;background:url('https://i.imgur.com/O5PmEjc.jpg') center/cover no-repeat;position:relative;">
+<div style="height:400px;background:url('https://i.imgur.com/O5PmEjc.jpg') center/cover fixed no-repeat;position:relative;">
   <div style="position:absolute;inset:0;background:rgba(28,24,20,0.4);display:flex;align-items:center;justify-content:center;">
   </div>
 </div>
@@ -1158,7 +1164,7 @@
 </section>
 
 <!-- PARALLAX 3 -->
-<div style="height:350px;background:url('https://i.imgur.com/XVz45jr.jpg') center/cover no-repeat;"></div>
+<div style="height:350px;background:url('https://i.imgur.com/XVz45jr.jpg') center/cover fixed no-repeat;"></div>
 
 <!-- MAP -->
 <section class="map-section" id="mapa">
