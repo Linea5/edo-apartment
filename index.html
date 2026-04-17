@@ -1,6 +1,91 @@
 <!DOCTYPE html>
 <html lang="sk">
 <head>
+  <!-- SEO & Social Meta -->
+  <meta name="description" content="The Edo Apartment — priestranný 3-izbový byt s 55 m² terasou pri rieke Váh v Banke pri Piešťanoch. Bazén, bicykle, paddleboard, pracovný kút. Prenájom priamo, bez platformy.">
+  <meta name="keywords" content="prenájom byt Piešťany, apartmán Piešťany, krátkodobý prenájom Banka, Blue Wave Riverside, ubytovanie Piešťany, work-cation Piešťany">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://edoapartment.sk/">
+
+  <!-- Open Graph (WhatsApp, Messenger, Facebook, LinkedIn) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://edoapartment.sk/">
+  <meta property="og:title" content="The Edo Apartment — Banka pri Piešťanoch">
+  <meta property="og:description" content="Náš byt. Občas ho pustíme správnym ľuďom. 3 izby, 55 m² terasa, bazén, bicykle, paddleboard. Prenájom priamo bez platformy.">
+  <meta property="og:image" content="https://i.imgur.com/fnpm1Wm.jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="800">
+  <meta property="og:locale" content="sk_SK">
+  <meta property="og:site_name" content="The Edo Apartment">
+
+  <!-- Twitter/X Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Edo Apartment — Banka pri Piešťanoch">
+  <meta name="twitter:description" content="Náš byt. Občas ho pustíme správnym ľuďom. 3 izby, 55 m² terasa, bazén, bicykle, paddleboard.">
+  <meta name="twitter:image" content="https://i.imgur.com/fnpm1Wm.jpeg">
+
+  <!-- Schema.org JSON-LD (GEO / LLM optimalizácia) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LodgingBusiness",
+    "name": "The Edo Apartment",
+    "description": "Priestranný 3-izbový byt s 55 m² terasou pri rieke Váh v Banke pri Piešťanoch. Bazén v komplexe, bicykle, paddleboard, pracovný kút s docking station. Krátkodobý prenájom priamo bez platformy.",
+    "url": "https://edoapartment.sk",
+    "image": "https://i.imgur.com/fnpm1Wm.jpeg",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Cesta Janka Alexyho 5402/18",
+      "addressLocality": "Banka",
+      "postalCode": "921 01",
+      "addressCountry": "SK",
+      "addressRegion": "Trnavský kraj"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 48.5760,
+      "longitude": 17.8306
+    },
+    "amenityFeature": [
+      {"@type": "LocationFeatureSpecification", "name": "Bazén", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Terasa 55 m²", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Bicykle", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Paddleboard", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Pracovný kút", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "WiFi", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Klimatizácia", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Nefajčiarsky", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Bezkontaktný príchod", "value": true}
+    ],
+    "numberOfRooms": 3,
+    "petsAllowed": false,
+    "smokingAllowed": false,
+    "checkinTime": "15:00",
+    "checkoutTime": "10:00",
+    "priceRange": "120€ – 250€ za noc",
+    "currenciesAccepted": "EUR",
+    "paymentAccepted": "Bankový prevod",
+    "telephone": "+421905213858",
+    "email": "edo.apartment@linea5.sk",
+    "containedInPlace": {
+      "@type": "Place",
+      "name": "Blue Wave Riverside",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Banka pri Piešťanoch",
+        "addressCountry": "SK"
+      }
+    },
+    "nearbyAttractions": [
+      "Piešťanské kúpele",
+      "Kúpeľný ostrov Piešťany",
+      "Váh hrádza cyklotrasa",
+      "Sĺňava"
+    ]
+  }
+  </script>
+
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Edo Apartment — Banka pri Piešťanoch</title>
@@ -41,6 +126,7 @@
     align-items: center;
     mix-blend-mode: normal;
     transition: background 0.4s, backdrop-filter 0.4s;
+    background: linear-gradient(to bottom, rgba(28,24,20,0.55) 0%, transparent 100%);
   }
   nav.scrolled {
     background: rgba(253,250,246,0.92);
