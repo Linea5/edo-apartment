@@ -1605,8 +1605,11 @@
       } else {
         const start = new Date(range.start);
         const end = new Date(range.end);
-        if (end.toDateString() === d.toDateString() && end.getHours() < 14) return 'checkout';
-        if (d >= start && d < end) return 'occupied';
+        const startDay = new Date(start); startDay.setHours(0,0,0,0);
+        const endDay = new Date(end); endDay.setHours(0,0,0,0);
+        if (d.getTime() === endDay.getTime() && end.getHours() < 14) return 'checkout';
+        if (d >= startDay && d < endDay) return 'occupied';
+        if (d.getTime() === startDay.getTime()) return 'occupied';
       }
     }
     return 'available';
@@ -1805,8 +1808,11 @@
       } else {
         const start = new Date(range.start);
         const end = new Date(range.end);
-        if (end.toDateString() === d.toDateString() && end.getHours() < 14) return 'checkout';
-        if (d >= start && d < end) return 'occupied';
+        const startDay = new Date(start); startDay.setHours(0,0,0,0);
+        const endDay = new Date(end); endDay.setHours(0,0,0,0);
+        if (d.getTime() === endDay.getTime() && end.getHours() < 14) return 'checkout';
+        if (d >= startDay && d < endDay) return 'occupied';
+        if (d.getTime() === startDay.getTime()) return 'occupied';
       }
     }
     return 'available';
