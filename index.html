@@ -642,6 +642,10 @@
     background: linear-gradient(135deg, #e8d5cc 50%, var(--warm-white) 50%);
     color: var(--dark);
   }
+  .cal-day.checkin-day {
+    background: linear-gradient(315deg, #e8d5cc 50%, var(--warm-white) 50%);
+    color: var(--dark);
+  }
   .cal-legend {
     display: flex;
     gap: 1.5rem;
@@ -666,6 +670,10 @@
   .legend-dot.occupied { background: #e8d5cc; }
   .legend-dot.checkout {
     background: linear-gradient(135deg, #e8d5cc 50%, var(--warm-white) 50%);
+    border: 1px solid var(--sand);
+  }
+  .legend-dot.checkin {
+    background: linear-gradient(315deg, #e8d5cc 50%, var(--warm-white) 50%);
     border: 1px solid var(--sand);
   }
   .cal-loading {
@@ -1401,7 +1409,8 @@
         <div class="cal-legend">
           <div class="legend-item"><div class="legend-dot available"></div> Voľný</div>
           <div class="legend-item"><div class="legend-dot occupied"></div> Obsadený</div>
-          <div class="legend-item"><div class="legend-dot checkout"></div> Deň odchodu (check-in od 15:00)</div>
+          <div class="legend-item"><div class="legend-dot checkout"></div> Deň odchodu</div>
+          <div class="legend-item"><div class="legend-dot checkin"></div> Deň príchodu (od 15:00)</div>
         </div>
       </div>
     </div>
@@ -1608,8 +1617,8 @@
         const startDay = new Date(start); startDay.setHours(0,0,0,0);
         const endDay = new Date(end); endDay.setHours(0,0,0,0);
         if (d.getTime() === endDay.getTime() && end.getHours() < 14) return 'checkout';
+        if (d.getTime() === startDay.getTime() && start.getHours() >= 14) return 'checkin';
         if (d >= startDay && d < endDay) return 'occupied';
-        if (d.getTime() === startDay.getTime()) return 'occupied';
       }
     }
     return 'available';
@@ -1648,6 +1657,8 @@
         cell.className = 'cal-day past';
       } else if (status === 'checkout') {
         cell.className = 'cal-day checkout-day';
+      } else if (status === 'checkin') {
+        cell.className = 'cal-day checkin-day';
         cell.title = 'Deň odchodu — check-in možný od 15:00';
       } else if (status === 'occupied') {
         cell.className = 'cal-day occupied';
@@ -1811,8 +1822,8 @@
         const startDay = new Date(start); startDay.setHours(0,0,0,0);
         const endDay = new Date(end); endDay.setHours(0,0,0,0);
         if (d.getTime() === endDay.getTime() && end.getHours() < 14) return 'checkout';
+        if (d.getTime() === startDay.getTime() && start.getHours() >= 14) return 'checkin';
         if (d >= startDay && d < endDay) return 'occupied';
-        if (d.getTime() === startDay.getTime()) return 'occupied';
       }
     }
     return 'available';
@@ -1851,6 +1862,8 @@
         cell.className = 'cal-day past';
       } else if (status === 'checkout') {
         cell.className = 'cal-day checkout-day';
+      } else if (status === 'checkin') {
+        cell.className = 'cal-day checkin-day';
         cell.title = 'Deň odchodu — check-in možný od 15:00';
       } else if (status === 'occupied') {
         cell.className = 'cal-day occupied';
