@@ -1005,6 +1005,14 @@
     .form-row { grid-template-columns: 1fr; }
     .hero-content { padding: 3rem 1.5rem; }
   }
+
+  @media (max-width: 768px) {
+    #gallery { columns: 2 !important; column-gap: 0.4rem !important; }
+  }
+  @media (max-width: 480px) {
+    #gallery { columns: 1 !important; }
+  }
+
 </style>
 </head>
 <body>
@@ -1092,138 +1100,228 @@
   </div>
 </section>
 
-<!-- PARALLAX 1 -->
-<div style="height:350px;background:url('https://i.imgur.com/dYR1QiL.jpg') center/cover fixed no-repeat;"></div>
-
-<!-- EQUIPMENT -->
-<section class="equipment" id="vybavenie">
+<!-- GALLERY -->
+<section id="vybavenie" style="background:var(--dark);padding:5rem 0;">
   <div class="container">
-    <div class="equipment-header reveal">
-      <p class="section-label">Vybavenie</p>
-      <h2>Postavený pre nás.<br><em>Vybavený pre teba.</em></h2>
-      <p>Byt sme zariaďovali pre seba — nie pre prenájom. Preto tam nájdeš veci, ktoré v prenájmoch zvyčajne chýbajú.</p>
+    <div class="equipment-header reveal" style="text-align:center;margin-bottom:3rem;">
+      <p class="section-label" style="color:var(--gold);">Vybavenie & atmosféra</p>
+      <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,4vw,3rem);font-weight:300;color:var(--warm-white);margin-bottom:1rem;">Postavený pre nás.<br><em style="color:var(--gold);">Vybavený pre teba.</em></h2>
+      <p style="color:var(--muted);max-width:600px;margin:0 auto;">Byt sme zariaďovali pre seba — nie pre prenájom. Klikni na ľubovoľnú fotku pre zväčšenie.</p>
     </div>
-    <div class="equipment-grid reveal">
 
-      <!-- OBÝVAČKA -->
-      <div class="equipment-category">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:1.25rem;">
-          <div style="grid-column:span 2;aspect-ratio:16/9;overflow:hidden;cursor:pointer;" onclick="openLightbox('https://i.imgur.com/IcqzaP3.jpg')">
-            <img src="https://i.imgur.com/IcqzaP3.jpg" alt="Obývačka" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div style="aspect-ratio:4/3;overflow:hidden;cursor:pointer;" onclick="openLightbox('https://i.imgur.com/Pg4jwzq.jpg')">
-            <img src="https://i.imgur.com/Pg4jwzq.jpg" alt="Pohľad cez poličku" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div style="aspect-ratio:4/3;overflow:hidden;cursor:pointer;" onclick="openLightbox('https://i.imgur.com/ML3J2SP.jpg')">
-            <img src="https://i.imgur.com/ML3J2SP.jpg" alt="Jedálenský stôl" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-        </div>
-        <p class="equipment-category-title">Obývačka</p>
-        <ul class="equipment-list">
-          <li>Priestranná obývačka s jedálňou</li>
-          <li>Smart TV + Orange TV</li>
-          <li>JBL reproduktor</li>
-          <li>Šach, spoločenské hry</li>
-          <li>Rozkladací jedálenský stôl (teak)</li>
-          <li>Klimatizácia</li>
-        </ul>
+    <!-- TERASA nadpis -->
+    <p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Terasa</p>
+
+    <!-- Riadok 1: 3 landscape -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:0.75rem;">
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-terasa-zapad.jpg')">
+        <img src="https://edoapartment.sk/g-terasa-zapad.jpg" alt="Západ slnka z terasy" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-terasa-stol.jpg')">
+        <img src="https://edoapartment.sk/g-terasa-stol.jpg" alt="Tíkový stôl pri rieke" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-terasa-gril.jpg')">
+        <img src="https://edoapartment.sk/g-terasa-gril.jpg" alt="Grilovanie s výhľadom" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+    </div>
+
+    <!-- Riadok 2: 3 portrait — mood, deň -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:0.75rem;">
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-terasa-dzban.jpg')">
+        <img src="https://edoapartment.sk/g-terasa-dzban.jpg" alt="Džbán limonády" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-terasa-kava.jpg')">
+        <img src="https://edoapartment.sk/g-terasa-kava.jpg" alt="Ranná káva" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-terasa-limonada.jpg')">
+        <img src="https://edoapartment.sk/g-terasa-limonada.jpg" alt="Limonáda a lehátka" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+    </div>
+
+    <!-- Riadok 3: 3 landscape -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:0.75rem;">
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-terasa-priestor.jpg')">
+        <img src="https://edoapartment.sk/g-terasa-priestor.jpg" alt="Terasa 55 m²" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-terasa-den.jpg')">
+        <img src="https://edoapartment.sk/g-terasa-den.jpg" alt="Terasa cez deň" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-terasa-grildetail.jpg')">
+        <img src="https://edoapartment.sk/g-terasa-grildetail.jpg" alt="Gril detail" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+    </div>
+
+    <!-- Riadok 3b: západ s bazénom + budova s topoľmi -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:0.75rem;">
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-zapad-bazen.jpg')">
+        <img src="https://edoapartment.sk/g-zapad-bazen.jpg" alt="Západ slnka s bazénom" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-budova-topole.jpg')">
+        <img src="https://edoapartment.sk/g-budova-topole.jpg" alt="Blue Wave — pohľad na budovu a topole" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+    </div>
+
+    <!-- Riadok 4: 3 portrait — kytica + bazen + kávička -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:0.75rem;">
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-terasa-tulipany.jpg')">
+        <img src="https://edoapartment.sk/g-terasa-tulipany.jpg" alt="Tulipány na tíkovom stole" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-bazen.jpg')">
+        <img src="https://edoapartment.sk/g-bazen.jpg" alt="Bazén v komplexe" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;object-position:center 30%;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-terasa-sprska.jpg')">
+        <img src="https://edoapartment.sk/g-terasa-sprska.jpg" alt="Lehátka pri sprške" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+    </div>
+
+    <!-- Riadok 5: 3 portrait — sprcha + večer/noc -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:3rem;">
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-terasa-sprska2.jpg')">
+        <img src="https://edoapartment.sk/g-terasa-sprska2.jpg" alt="Terasa sprcha" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-terasa-svetla.jpg')">
+        <img src="https://edoapartment.sk/g-terasa-svetla.jpg" alt="Večerná terasa" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-terasa-noc2.jpg')">
+        <img src="https://edoapartment.sk/g-terasa-noc2.jpg" alt="Nočná terasa — svetlá" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+    </div>
+
+    <!-- Riadok 6: nočné pohľady — noc3 na celú šírku -->
+    <div style="display:grid;grid-template-columns:1fr;gap:0.75rem;margin-bottom:3rem;">
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-terasa-noc3.jpg')">
+        <img src="https://edoapartment.sk/g-terasa-noc3.jpg" alt="Nočný pohľad z terasy s bazénom a riekou" loading="lazy" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+    </div>
+
+    <!-- OBÝVAČKA & KUCHYŇA nadpis -->
+    <p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Obývačka & kuchyňa</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:3rem;">
+
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-obyvacka-rieka.jpg')">
+        <img src="https://edoapartment.sk/g-obyvacka-rieka.jpg" alt="Jedáleň s výhľadom na rieku" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-obyvacka-wide.jpg')">
+        <img src="https://edoapartment.sk/g-obyvacka-wide.jpg" alt="Pohľad z kuchyne" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-obyvacka-sach.jpg')">
+        <img src="https://edoapartment.sk/g-obyvacka-sach.jpg" alt="Obývačka a terasa" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-obyvacka-detail.jpg')">
+        <img src="https://edoapartment.sk/g-obyvacka-detail.jpg" alt="Obývačka detail" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-kuchyna.jpg')">
+        <img src="https://edoapartment.sk/g-kuchyna.jpg" alt="Kuchyňa" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-obyvacka-priestor.jpg')">
+        <img src="https://edoapartment.sk/g-obyvacka-priestor.jpg" alt="Priestranná obývačka — celkový pohľad" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-obyvacka-tulipany.jpg')">
+        <img src="https://edoapartment.sk/g-obyvacka-tulipany.jpg" alt="Tulipány, obraz, komoda" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-obyvacka-sach2.jpg')">
+        <img src="https://edoapartment.sk/g-obyvacka-sach2.jpg" alt="Šach v obývačke" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-kuchyna-kavovar2.jpg')">
+        <img src="https://edoapartment.sk/g-kuchyna-kavovar2.jpg" alt="Kávovar" loading="lazy" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
       </div>
 
-      <!-- TERASA -->
-      <div class="equipment-category">
-        <div class="equipment-photo" onclick="openLightbox('https://i.imgur.com/oDMhVoP.jpg')">
-          <img src="https://i.imgur.com/oDMhVoP.jpg" alt="Terasa">
-        </div>
-        <p class="equipment-category-title">Terasa 55 m²</p>
-        <ul class="equipment-list">
+    </div>
+
+    <!-- PRACOVNÝ KÚT nadpis -->
+    <p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Pracovný kút</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:3rem;">
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-kut-stol3.jpg')">
+        <img src="https://edoapartment.sk/g-kut-stol3.jpg" alt="Pracovný kút — stôl s monitorom" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-kut-kniZnica.jpg')">
+        <img src="https://edoapartment.sk/g-kut-kniZnica.jpg" alt="Pracovný kút — knižnica" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-kut-postel.jpg')">
+        <img src="https://edoapartment.sk/g-kut-postel.jpg" alt="Pracovný kút — výklopná posteľ" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+    </div>
+
+    <!-- SPANIE nadpis -->
+    <p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Spanie</p>
+
+    <!-- Spálňa: 2 fotky, tretia bunka prázdna -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:0.75rem;">
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-spalna.jpg')">
+        <img src="https://edoapartment.sk/g-spalna.jpg" alt="Spálňa" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-spalna-detail.jpg')">
+        <img src="https://edoapartment.sk/g-spalna-detail.jpg" alt="Spálňa — stolík" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div></div>
+    </div>
+
+    <!-- Detská izba (4) + výklopná posteľ (1) = 5 fotiek, 3-stĺpcová mriežka -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:3rem;">
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-detska-postel1.jpg')">
+        <img src="https://edoapartment.sk/g-detska-postel1.jpg" alt="Detská izba — posteľ a mapa sveta" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-detska-rieka.jpg')">
+        <img src="https://edoapartment.sk/g-detska-rieka.jpg" alt="Detská izba — výhľad na Sĺňavu" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-detska-postel2.jpg')">
+        <img src="https://edoapartment.sk/g-detska-postel2.jpg" alt="Detská izba — graffiti a slnko" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-detska-okno.jpg')">
+        <img src="https://edoapartment.sk/g-detska-okno.jpg" alt="Detská izba — záclony a rieka" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+      <div style="cursor:pointer;overflow:hidden;border-radius:2px;" onclick="openLightbox('https://edoapartment.sk/g-kut-postel.jpg')">
+        <img src="https://edoapartment.sk/g-kut-postel.jpg" alt="Výklopná posteľ" loading="lazy" style="width:100%;aspect-ratio:3/4;object-fit:cover;display:block;transition:transform 0.5s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'">
+      </div>
+    </div>
+
+        <!-- VYBAVENIE ZOZNAM -->
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:2rem;padding-top:3rem;border-top:1px solid rgba(255,255,255,0.1);" class="reveal">
+      <div>
+        <p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Terasa & exteriér</p>
+        <ul style="list-style:none;color:var(--muted);font-size:0.85rem;line-height:2.2;">
           <li>55 m² terasa, juhozápad</li>
           <li>Západ slnka priamo z terasy</li>
-          <li>Tíkový stôl + stoličky</li>
+          <li>Tíkový stôl + 4 stoličky</li>
           <li>Markíza s čidlom vetra</li>
-          <li>Gril, servírovacie stolíky</li>
+          <li>Gril + servírovacie stolíky</li>
           <li>Reťazové osvetlenie</li>
-          <li>Plašiče komárov</li>
-          <li>4 lehátka (terasa / bazén)</li>
+          <li>Lehátka, terasa sprcha</li>
+          <li>Bazén v komplexe (9–19h)</li>
         </ul>
       </div>
-
-      <!-- KUCHYŇA -->
-      <div class="equipment-category">
-        <div class="equipment-photo" onclick="openLightbox('https://i.imgur.com/yYqiYJk.jpg')">
-          <img src="https://i.imgur.com/yYqiYJk.jpg" alt="Kuchyňa">
-        </div>
-        <p class="equipment-category-title">Kuchyňa</p>
-        <ul class="equipment-list">
+      <div>
+        <p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Interiér</p>
+        <ul style="list-style:none;color:var(--muted);font-size:0.85rem;line-height:2.2;">
+          <li>Priestranná obývačka & jedáleň</li>
+          <li>Smart TV + Orange TV, JBL</li>
+          <li>Šach, spoločenské hry</li>
           <li>Kávovar + speňovač mlieka</li>
-          <li>Indukčná doska, rúra, mikrovlnka</li>
-          <li>Umývačka riadu</li>
-          <li>AirFryer, gril, Soda Stream</li>
-          <li>Rýchlovarná konvica, hriankovač</li>
-          <li>Plne vybavená — hrnce, panvice, príbor</li>
+          <li>Indukcia, rúra, AirFryer</li>
+          <li>Umývačka, Soda Stream</li>
+          <li>Práčka + sušička, Roborock</li>
+          <li>Sprcha s termostatom, WC so sprškou</li>
         </ul>
       </div>
-
-      <!-- SPANIE -->
-      <div class="equipment-category">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:1.25rem;">
-          <div style="grid-column:span 2;aspect-ratio:16/9;overflow:hidden;cursor:pointer;" onclick="openLightbox('https://i.imgur.com/17EISpv.jpg')">
-            <img src="https://i.imgur.com/17EISpv.jpg" alt="Spálňa" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div style="aspect-ratio:4/3;overflow:hidden;cursor:pointer;" onclick="openLightbox('https://i.imgur.com/QAS973E.jpg')">
-            <img src="https://i.imgur.com/QAS973E.jpg" alt="Detská izba" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-          <div style="aspect-ratio:4/3;overflow:hidden;cursor:pointer;" onclick="openLightbox('https://i.imgur.com/8wEOZYV.jpg')">
-            <img src="https://i.imgur.com/8wEOZYV.jpg" alt="Výklopná posteľ" style="width:100%;height:100%;object-fit:cover;">
-          </div>
-        </div>
-        <p class="equipment-category-title">Spanie & izby</p>
-        <ul class="equipment-list">
-          <li><strong>Spálňa</strong> — manželská posteľ, šatník, klimatizácia</li>
-          <li><strong>Detská izba</strong> — 2 vysúvacie postele (4 miesta)</li>
-          <li><strong>Obývačka</strong> — výklopná posteľ pre 2</li>
-          <li>Posteľné prádlo, vankúše, paplóny</li>
-          <li>Uteráky, osušky, osušky k bazénu</li>
-          <li>Žehlička, žehliaca doska, sušiak</li>
-        </ul>
-      </div>
-
-      <!-- PRACOVNÝ KÚT -->
-      <div class="equipment-category">
-        <div class="equipment-photo" onclick="openLightbox('https://i.imgur.com/ZHdEd6M.jpg')">
-          <img src="https://i.imgur.com/ZHdEd6M.jpg" alt="Pracovný kút">
-        </div>
-        <p class="equipment-category-title">Pracovný kút</p>
-        <ul class="equipment-list">
-          <li>Docking station + monitor</li>
-          <li>Apple klávesnica + AirPod Mini</li>
-          <li>Laserová tlačiareň (WiFi)</li>
+      <div>
+        <p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;">Spanie & práca</p>
+        <ul style="list-style:none;color:var(--muted);font-size:0.85rem;line-height:2.2;">
+          <li>Spálňa — manžel. posteľ, klíma</li>
+          <li>Detská izba — 2×2 miesta</li>
+          <li>Výklopná posteľ pre 2</li>
+          <li>Docking station, monitor, tlačiareň</li>
           <li>WiFi TeamEdo — rýchla, celý byt</li>
-          <li>Výklopná posteľ (keď nepracuješ)</li>
+          <li>Nuki — bezkontaktný príchod</li>
+          <li>Bicykle (2+2), paddleboard</li>
+          <li>Nordic Walking palice</li>
         </ul>
       </div>
-
-      <!-- KÚPEĽŇA -->
-      <div class="equipment-category">
-        <div class="equipment-photo" onclick="openLightbox('https://i.imgur.com/JLwlLTz.jpg')">
-          <img src="https://i.imgur.com/JLwlLTz.jpg" alt="Kúpeľňa">
-        </div>
-        <p class="equipment-category-title">Kúpeľňa & starostlivosť</p>
-        <ul class="equipment-list">
-          <li>Práčka + sušička</li>
-          <li>Sušič vlasov</li>
-          <li>Sprcha s termostatom</li>
-          <li>WC so sprškou</li>
-          <li>Ventilátor</li>
-          <li>Robotický vysávač Roborock</li>
-        </ul>
-      </div>
-
     </div>
   </div>
 </section>
 
 <!-- PARALLAX -->
-<div style="height:400px;background:url('https://i.imgur.com/O5PmEjc.jpg') center/cover fixed no-repeat;position:relative;">
+<div style="height:400px;background:url('https://edoapartment.sk/g-terasa-noc3.jpg') center/cover fixed no-repeat;position:relative;">
   <div style="position:absolute;inset:0;background:rgba(28,24,20,0.4);display:flex;align-items:center;justify-content:center;">
   </div>
 </div>
@@ -1249,8 +1347,11 @@
   </div>
 </section>
 
+<!-- PARALLAX 2 -->
+<div style="height:350px;background:url('https://edoapartment.sk/g-sekt-zapad.jpg') center/cover fixed no-repeat;background-position:center 30%;"></div>
+
 <!-- PARALLAX 3 -->
-<div style="height:350px;background:url('https://i.imgur.com/XVz45jr.jpg') center/cover fixed no-repeat;"></div>
+<div style="height:350px;background:url('https://edoapartment.sk/pohlad-z-vody.jpg') center/cover fixed no-repeat;"></div>
 
 <!-- MAP -->
 <section class="map-section" id="mapa">
