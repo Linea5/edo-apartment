@@ -96,6 +96,26 @@
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
   gtag('config', 'G-N7W14PD697');
+
+  // Track key section views
+  const _gaObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const section = entry.target.id;
+        if (section) {
+          gtag('event', 'section_view', { event_category: 'engagement', event_label: section });
+          _gaObserver.unobserve(entry.target); // track once
+        }
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    ['ceny', 'rezervacia', 'vybavenie'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) _gaObserver.observe(el);
+    });
+  });
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -1581,6 +1601,29 @@
   let occupiedRanges = [];
 
   async function fetchEvents() {
+    const CACHE_KEY = 'edo_calendar_cache';
+    const CACHE_TTL = 30 * 60 * 1000; // 30 minút
+    try {
+      // Skontroluj cache
+      const cached = sessionStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const { data: cachedData, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp < CACHE_TTL) {
+          occupiedRanges = cachedData.map(r => ({
+            ...r,
+            start: r.start ? new Date(r.start) : null,
+            end: r.end ? new Date(r.end) : null,
+            endExcl: r.endExcl ? new Date(r.endExcl) : null,
+            checkout: r.checkout ? new Date(r.checkout) : null,
+          }));
+          document.getElementById('cal-loading').style.display = 'none';
+          document.getElementById('cal-content').style.display = 'block';
+          renderCalendar();
+          return;
+        }
+      }
+    } catch(cacheErr) { /* ignoruj cache chyby */ }
+
     const now = new Date();
     const timeMin = new Date(now.getFullYear(), now.getMonth() - 1, 1).toISOString();
     const timeMax = new Date(now.getFullYear() + 1, now.getMonth() + 1, 0).toISOString();
@@ -1606,6 +1649,10 @@
           }
         });
       }
+      // Ulož do cache
+      try {
+        sessionStorage.setItem('edo_calendar_cache', JSON.stringify({ data: occupiedRanges, timestamp: Date.now() }));
+      } catch(cacheErr) { /* ignoruj */ }
       document.getElementById('cal-loading').style.display = 'none';
       document.getElementById('cal-content').style.display = 'block';
       renderCalendar();
@@ -1764,6 +1811,14 @@
       });
 
       // no-cors means we can't read response, assume success
+      // GA event tracking
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'reservation_submitted', {
+          event_category: 'booking',
+          event_label: data.tariff || 'unknown',
+          value: parseInt(data.totalPrice) || 0
+        });
+      }
       this.reset();
       statusMsg.className = 'status-msg success';
       statusMsg.textContent = '✓ Žiadosť odoslaná. Ozveme sa vám do 24 hodín.';
@@ -1788,6 +1843,29 @@
   let occupiedRanges = [];
 
   async function fetchEvents() {
+    const CACHE_KEY = 'edo_calendar_cache';
+    const CACHE_TTL = 30 * 60 * 1000; // 30 minút
+    try {
+      // Skontroluj cache
+      const cached = sessionStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const { data: cachedData, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp < CACHE_TTL) {
+          occupiedRanges = cachedData.map(r => ({
+            ...r,
+            start: r.start ? new Date(r.start) : null,
+            end: r.end ? new Date(r.end) : null,
+            endExcl: r.endExcl ? new Date(r.endExcl) : null,
+            checkout: r.checkout ? new Date(r.checkout) : null,
+          }));
+          document.getElementById('cal-loading').style.display = 'none';
+          document.getElementById('cal-content').style.display = 'block';
+          renderCalendar();
+          return;
+        }
+      }
+    } catch(cacheErr) { /* ignoruj cache chyby */ }
+
     const now = new Date();
     const timeMin = new Date(now.getFullYear(), now.getMonth() - 1, 1).toISOString();
     const timeMax = new Date(now.getFullYear() + 1, now.getMonth() + 1, 0).toISOString();
@@ -1811,6 +1889,10 @@
           }
         });
       }
+      // Ulož do cache
+      try {
+        sessionStorage.setItem('edo_calendar_cache', JSON.stringify({ data: occupiedRanges, timestamp: Date.now() }));
+      } catch(cacheErr) { /* ignoruj */ }
       document.getElementById('cal-loading').style.display = 'none';
       document.getElementById('cal-content').style.display = 'block';
       renderCalendar();
