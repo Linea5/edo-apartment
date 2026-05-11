@@ -1550,7 +1550,7 @@
           <div class="form-row">
             <div class="form-group">
               <label>Počet osôb * <span style="font-size:0.8em;color:var(--muted);font-weight:normal;">(deti do 2 rokov nezapočítavajte)</span></label>
-              <select name="guests" required>
+              <select id="guests" required>
                 <option value="">—</option>
                 <option value="1">1 osoba</option>
                 <option value="2">2 osoby</option>
@@ -1558,6 +1558,8 @@
                 <option value="4">4 osoby</option>
                 <option value="5">5 osôb</option>
                 <option value="6">6 osôb</option>
+                <option value="7">7 osôb</option>
+                <option value="8">8 osôb</option>
               </select>
             </div>
             <div class="form-group">
@@ -1569,6 +1571,26 @@
             <label>Správa (voliteľné)</label>
             <textarea name="message" placeholder="Čo vás k nám privádza? Prípadne — kto vás k nám poslal?"></textarea>
           </div>
+
+          <!-- LIVE PRICE SUMMARY -->
+          <div id="priceSummary" style="display:none; background:#1C1814; color:var(--warm-white); padding:20px 24px; margin-bottom:16px; border-radius:2px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+              <span style="color:var(--gold); font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase;" id="priceTariff">—</span>
+              <span style="color:var(--muted); font-size:0.85rem;" id="priceNights">—</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; border-top:1px solid rgba(255,255,255,0.1); padding-top:12px; margin-top:4px;">
+              <span style="color:var(--muted); font-size:0.85rem;">Celková suma (prevod)</span>
+              <span style="font-size:1.4rem; font-weight:600; color:var(--gold);" id="priceTotal">—</span>
+            </div>
+            <p style="color:var(--muted); font-size:0.75rem; margin-top:8px;">+ 50 € upratovanie hotovosťou pri príchode · <span id="pricePersonNote"></span></p>
+            <!-- hidden fields for form submission -->
+            <input type="hidden" name="nights" id="hidNights">
+            <input type="hidden" name="persons" id="hidPersons">
+            <input type="hidden" name="tariff" id="hidTariff">
+            <input type="hidden" name="pricePerNight" id="hidPricePerNight">
+            <input type="hidden" name="totalPrice" id="hidTotalPrice">
+          </div>
+
           <button type="submit" class="form-submit" id="submitBtn">Odoslať žiadosť</button>
           <div class="status-msg" id="statusMsg"></div>
         </form>
@@ -1770,7 +1792,68 @@
   document.getElementById('checkout').min = today;
   document.getElementById('checkin').addEventListener('change', function() {
     document.getElementById('checkout').min = this.value;
+    calculatePrice();
   });
+  document.getElementById('checkout').addEventListener('change', calculatePrice);
+  document.getElementById('guests').addEventListener('change', calculatePrice);
+
+  const PRICES = {
+    vikend:     { label: 'Víkend (2–3 noci)', perPerson: [190, 230, 250] },
+    workcation: { label: 'Work-cation (4–6 nocí)', perPerson: [130, 170, 190] },
+    dlhsi:      { label: 'Dlhší pobyt (7+ nocí)', perPerson: [120, 160, 180] },
+  };
+
+  function getPricePerNight(tariffKey, guests) {
+    const t = PRICES[tariffKey];
+    if (!t) return 0;
+    if (guests <= 4) return t.perPerson[0];
+    if (guests <= 6) return t.perPerson[1];
+    return t.perPerson[2];
+  }
+
+  function calculatePrice() {
+    const checkin = document.getElementById('checkin').value;
+    const checkout = document.getElementById('checkout').value;
+    const guests = parseInt(document.getElementById('guests').value) || 0;
+
+    if (!checkin || !checkout || !guests) {
+      document.getElementById('priceSummary').style.display = 'none';
+      return;
+    }
+
+    const nights = Math.round((new Date(checkout) - new Date(checkin)) / (1000 * 60 * 60 * 24));
+    if (nights <= 0) {
+      document.getElementById('priceSummary').style.display = 'none';
+      return;
+    }
+
+    // Determine tariff
+    let tariffKey;
+    if (nights <= 3) tariffKey = 'vikend';
+    else if (nights <= 6) tariffKey = 'workcation';
+    else tariffKey = 'dlhsi';
+
+    const pricePerNight = getPricePerNight(tariffKey, guests);
+    const total = pricePerNight * nights;
+    const tariff = PRICES[tariffKey];
+
+    // Person note
+    const personNote = guests <= 4 ? '1–4 osoby' : guests <= 6 ? '5–6 osôb' : '7–8 osôb';
+
+    // Update display
+    document.getElementById('priceTariff').textContent = tariff.label;
+    document.getElementById('priceNights').textContent = `${nights} nocí × ${pricePerNight} €`;
+    document.getElementById('priceTotal').textContent = total + ' €';
+    document.getElementById('pricePersonNote').textContent = personNote;
+    document.getElementById('priceSummary').style.display = 'block';
+
+    // Fill hidden fields
+    document.getElementById('hidNights').value = nights;
+    document.getElementById('hidPersons').value = guests;
+    document.getElementById('hidTariff').value = tariff.label;
+    document.getElementById('hidPricePerNight').value = pricePerNight;
+    document.getElementById('hidTotalPrice').value = total;
+  }
 
   // FORM SUBMIT
   // Replace SCRIPT_URL with your Google Apps Script Web App URL
