@@ -564,7 +564,7 @@ async function sendMessage(userText) {
         'anthropic-dangerous-direct-browser-access': 'true'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-6',
         max_tokens: 1000,
         system: APARTMENT_KNOWLEDGE,
         messages: conversation
@@ -572,14 +572,17 @@ async function sendMessage(userText) {
     });
 
     const data = await response.json();
-    const reply = data.content?.[0]?.text || 'Prepáčte, nastala chyba. Skús znova.';
+    if (data.type === 'error') {
+      console.error('Anthropic API error:', data.error);
+    }
+    const reply = data.content?.[0]?.text || 'Prepáč, nastala chyba. Skús to znova — a ak to nepomôže, napíš majiteľovi.';
 
     typingEl.remove();
     addMessage('assistant', reply);
     conversation.push({ role: 'assistant', content: reply });
   } catch(e) {
     typingEl.remove();
-    addMessage('assistant', 'Nastala technická chyba. Skúste znova alebo kontaktujte majiteľa.');
+    addMessage('assistant', 'Nastala technická chyba. Skús znova alebo napíš majiteľovi.');
   }
 
   btn.disabled = false;
