@@ -1686,23 +1686,29 @@
   function getDayStatus(date) {
     const d = new Date(date);
     d.setHours(0,0,0,0);
+    // Zbierame stavy zo vsetkych rezervacii: odchod + prichod v jeden den = obsadene
+    const statuses = new Set();
     for (const range of occupiedRanges) {
       if (range.allDay) {
         const start = new Date(range.start); start.setHours(0,0,0,0);
         const checkout = new Date(range.checkout); checkout.setHours(0,0,0,0);
         const endExcl = new Date(range.endExcl); endExcl.setHours(0,0,0,0);
-        if (d.getTime() === checkout.getTime()) return 'checkout';
-        if (d >= start && d < endExcl) return 'occupied';
+        if (d.getTime() === checkout.getTime()) statuses.add('checkout');
+        else if (d >= start && d < endExcl) statuses.add('occupied');
       } else {
         const start = new Date(range.start);
         const end = new Date(range.end);
         const startDay = new Date(start); startDay.setHours(0,0,0,0);
         const endDay = new Date(end); endDay.setHours(0,0,0,0);
-        if (d.getTime() === endDay.getTime() && end.getHours() < 14) return 'checkout';
-        if (d.getTime() === startDay.getTime() && start.getHours() >= 14) return 'checkin';
-        if (d >= startDay && d < endDay) return 'occupied';
+        if (d.getTime() === endDay.getTime() && end.getHours() < 14) statuses.add('checkout');
+        else if (d.getTime() === startDay.getTime() && start.getHours() >= 14) statuses.add('checkin');
+        else if (d >= startDay && d < endDay) statuses.add('occupied');
       }
     }
+    if (statuses.has('occupied')) return 'occupied';
+    if (statuses.has('checkout') && statuses.size > 1) return 'occupied';
+    if (statuses.has('checkin')) return 'checkin';
+    if (statuses.has('checkout')) return 'checkout';
     return 'available';
   }
 
@@ -1987,23 +1993,29 @@
   function getDayStatus(date) {
     const d = new Date(date);
     d.setHours(0,0,0,0);
+    // Zbierame stavy zo vsetkych rezervacii: odchod + prichod v jeden den = obsadene
+    const statuses = new Set();
     for (const range of occupiedRanges) {
       if (range.allDay) {
         const start = new Date(range.start); start.setHours(0,0,0,0);
         const checkout = new Date(range.checkout); checkout.setHours(0,0,0,0);
         const endExcl = new Date(range.endExcl); endExcl.setHours(0,0,0,0);
-        if (d.getTime() === checkout.getTime()) return 'checkout';
-        if (d >= start && d < endExcl) return 'occupied';
+        if (d.getTime() === checkout.getTime()) statuses.add('checkout');
+        else if (d >= start && d < endExcl) statuses.add('occupied');
       } else {
         const start = new Date(range.start);
         const end = new Date(range.end);
         const startDay = new Date(start); startDay.setHours(0,0,0,0);
         const endDay = new Date(end); endDay.setHours(0,0,0,0);
-        if (d.getTime() === endDay.getTime() && end.getHours() < 14) return 'checkout';
-        if (d.getTime() === startDay.getTime() && start.getHours() >= 14) return 'checkin';
-        if (d >= startDay && d < endDay) return 'occupied';
+        if (d.getTime() === endDay.getTime() && end.getHours() < 14) statuses.add('checkout');
+        else if (d.getTime() === startDay.getTime() && start.getHours() >= 14) statuses.add('checkin');
+        else if (d >= startDay && d < endDay) statuses.add('occupied');
       }
     }
+    if (statuses.has('occupied')) return 'occupied';
+    if (statuses.has('checkout') && statuses.size > 1) return 'occupied';
+    if (statuses.has('checkin')) return 'checkin';
+    if (statuses.has('checkout')) return 'checkout';
     return 'available';
   }
 
