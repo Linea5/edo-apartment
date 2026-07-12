@@ -279,45 +279,6 @@
 const PROXY_URL = 'https://script.google.com/macros/s/AKfycbwA4ak9yWJ75Lngx6zjC2KIGtFWP9A3OnTG29W68M3yEBfKkHGYuOr2sTGL_gxkR5RW4A/exec';
 
 const conversation = [];
-let jsonpCounter = 0;
-
-// JSONP volanie: vloží <script> tag s callbackom, tým sa vyhne CORS
-function callProxy(messages) {
-  return new Promise((resolve, reject) => {
-    jsonpCounter++;
-    const cbName = 'edoCb_' + jsonpCounter;
-    const script = document.createElement('script');
-    let done = false;
-
-    const timeout = setTimeout(() => {
-      if (!done) {
-        cleanup();
-        reject(new Error('timeout'));
-      }
-    }, 30000);
-
-    function cleanup() {
-      done = true;
-      clearTimeout(timeout);
-      delete window[cbName];
-      if (script.parentNode) script.parentNode.removeChild(script);
-    }
-
-    window[cbName] = function(data) {
-      cleanup();
-      resolve(data);
-    };
-
-    script.onerror = function() {
-      if (!done) { cleanup(); reject(new Error('script_error')); }
-    };
-
-    const params = 'callback=' + encodeURIComponent(cbName)
-      + '&messages=' + encodeURIComponent(JSON.stringify(messages));
-    script.src = PROXY_URL + '?' + params;
-    document.body.appendChild(script);
-  });
-}
 
 async function sendMessage(userText) {
   const input = document.getElementById('chatInput');
@@ -334,7 +295,15 @@ async function sendMessage(userText) {
   const typingEl = addTyping();
 
   try {
-    const data = await callProxy(conversation);
+    // fetch s text/plain: obíde CORS preflight, nasleduje Apps Script redirect
+    // na googleusercontent, ktorý CORS hlavičku vracia -> odpoveď sa dá prečítať.
+    const response = await fetch(PROXY_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: JSON.stringify({ messages: conversation })
+    });
+
+    const data = await response.json();
     if (data.type === 'error') {
       console.error('Proxy/Anthropic error:', data.error);
     }
